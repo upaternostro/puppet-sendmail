@@ -1,0 +1,28 @@
+{
+  "checksums": {
+    "manifests/init.pp": "a7268d0a133929372fb3572da70ce1a5",
+    "templates/genericstable.erb": "9020294ae7f9c531d7277f7e56931e43",
+    "spec/spec_helper.rb": "a55d1e6483344f8ec6963fcb2c220372",
+    "templates/generics-domains.erb": "dca69a9969b018bb2fd74a88cdf0b369",
+    "README.md": "967f5e29e1be9e4b26951d0c9cfc7fef",
+    "templates/aliases.erb": "0d27df961072474206dea6c9273043c3",
+    "manifests/params.pp": "9905023b1c3ccee2d7c72ac6b47d0cbf",
+    "templates/sendmail.mc.erb": "99cfb6f31d73451902ba790eb9c46641",
+    "Modulefile": "29d22679bbefe53030427f1ebcaa62dc",
+    "tests/init.pp": "20948551a5d6fa591653777ec2df3c15"
+  },
+  "types": [
+
+  ],
+  "name": "desalvo-sendmail",
+  "version": "0.1.0",
+  "license": "Apache License, Version 2.0",
+  "project_page": "https://github.com/desalvo/puppet-sendmail",
+  "author": "desalvo",
+  "dependencies": [
+
+  ],
+  "summary": "Puppet module for sendmail",
+  "description": "Puppet module for sendmail configuration",
+  "source": "https://github.com/desalvo/puppet-sendmail"
+}

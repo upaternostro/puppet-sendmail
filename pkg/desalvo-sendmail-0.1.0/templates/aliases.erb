@@ -1,0 +1,3 @@
+<% scope.lookupvar('sendmail::aliases').sort.each do |@user,@email| -%>
+<%= @user %>:    <%= @email %>
+<% end -%> 
