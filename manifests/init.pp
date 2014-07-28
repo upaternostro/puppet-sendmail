@@ -122,7 +122,7 @@ class sendmail (
 
     exec { "make_sendmail_config" :
         command     => 'make -C /etc/mail',
-        path        => [ "/bin" ],
+        path        => [ "/bin", "/usr/bin" ],
         cwd         => '/etc/mail',
         refreshonly => true,
         notify      => Service[$sendmail::service_name],
