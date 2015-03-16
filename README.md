@@ -48,6 +48,10 @@ Contributors
 Release Notes
 -------------
 
+**0.1.2**
+
+* Template fix
+
 **0.1.1**
 
 * Fix for path to the make command
