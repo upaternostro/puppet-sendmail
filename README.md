@@ -25,7 +25,9 @@ Parameters
 * **aliases**: hash of aliases. Example: { 'user' => 'email' }
 * **generics_domains**: list of domains to serve. Example: [ 'domain1.com', 'domain2.com' }
 * **generics_table**: hash of user email addresses for multiple domains. Example: { 'user', 'email' }
-
+* **is_relay**: bool, set to 1 if you want the server to be a relay
+* **relay-domains**: list of domains to relay for. Example: { 'example.com', 'example2.co.uk' }
+* **listen_ip**: Single IP address that the server should listen on. Example: 127.0.0.1
 
 Usage
 -----
@@ -47,6 +49,11 @@ Contributors
 
 Release Notes
 -------------
+
+**0.1.3**
+
+* Added relayer functionality
+* Added listen_ip setting
 
 **0.1.2**
 
