@@ -83,6 +83,9 @@ FEATURE(`no_default_msa', `dnl')dnl
 FEATURE(`smrsh', `/usr/sbin/smrsh')dnl
 FEATURE(`mailertable', `hash -o /etc/mail/mailertable.db')dnl
 FEATURE(`virtusertable', `hash -o /etc/mail/virtusertable.db')dnl
+<% if scope.lookupvar('sendmail::virtuser_domain') -%>
+VIRTUSER_DOMAIN(`<%= scope.lookupvar('sendmail::virtuser_domain') %>')dnl
+<% end -%>
 FEATURE(redirect)dnl
 FEATURE(always_add_domain)dnl
 FEATURE(use_cw_file)dnl
