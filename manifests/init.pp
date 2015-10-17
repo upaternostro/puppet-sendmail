@@ -52,6 +52,27 @@
 # [*relay_domains*]
 #   List of domains to relay email for. Example: ['example.com','example2.co.uk']
 #
+# [*enable_smtps*]
+#   Specifies if sendmail should listen on SMTPS port. Boolean
+#
+# [*ssl_cacert_path*]
+#   Path for the CA certificate directory, default is undef
+#
+# [*ssl_cacert*]
+#   Full file path for the CA certificate, default is undef
+#
+# [*ssl_server_cert*]
+#   Full file path for the server certificate, default is undef
+#
+# [*ssl_server_key*]
+#   Full file path for the server private key, default is undef
+#
+# [*ssl_client_cert*]
+#   Full file path for the client certificate, default is undef
+#
+# [*ssl_client_key*]
+#   Full file path for the client private key, default is undef
+#
 # === Examples
 #
 #  class { sendmail:
@@ -80,7 +101,14 @@ class sendmail (
   $generics_table           = undef,
   $listen_ip                = '127.0.0.1',
   $is_relay                 = undef,
-  $relay_domains            = $sendmail::params::relay_domains
+  $relay_domains            = $sendmail::params::relay_domains,
+  $enable_smtps             = false,
+  $ssl_cacert_path          = '',
+  $ssl_cacert               = '',
+  $ssl_server_cert          = '',
+  $ssl_server_key           = '',
+  $ssl_client_cert          = '',
+  $ssl_client_key           = ''
 ) inherits sendmail::params {
     package { $sendmail::params::sendmail_pkgs: ensure => latest }
 

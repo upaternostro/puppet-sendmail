@@ -61,10 +61,36 @@ dnl #     cd /etc/pki/tls/certs; make sendmail.pem
 dnl # Complete usage:
 dnl #     make -C /etc/pki/tls/certs usage
 dnl #
+<% if scope.lookupvar('sendmail::ssl_cacert_path') != "" -%>
+define(`confCACERT_PATH', `<%= scope.lookupvar('sendmail::ssl_cacert_path') %>')dnl
+<% else -%>
 dnl define(`confCACERT_PATH', `/etc/pki/tls/certs')dnl
+<% end -%>
+<% if scope.lookupvar('sendmail::ssl_cacert') != "" -%>
+define(`confCACERT', `<%= scope.lookupvar('sendmail::ssl_cacert') %>')dnl
+<% else -%>
 dnl define(`confCACERT', `/etc/pki/tls/certs/ca-bundle.crt')dnl
+<% end -%>
+<% if scope.lookupvar('sendmail::ssl_server_cert') != "" -%>
+define(`confSERVER_CERT', `<%= scope.lookupvar('sendmail::ssl_server_cert') %>')dnl
+<% else -%>
 dnl define(`confSERVER_CERT', `/etc/pki/tls/certs/sendmail.pem')dnl
+<% end -%>
+<% if scope.lookupvar('sendmail::ssl_server_key') != "" -%>
+define(`confSERVER_KEY', `<%= scope.lookupvar('sendmail::ssl_server_key') %>')dnl
+<% else -%>
 dnl define(`confSERVER_KEY', `/etc/pki/tls/certs/sendmail.pem')dnl
+<% end -%>
+<% if scope.lookupvar('sendmail::ssl_client_cert') != "" -%>
+define(`confCLIENT_CERT', `<%= scope.lookupvar('sendmail::ssl_client_cert') %>')dnl
+<% else -%>
+dnl define(`confCLIENT_CERT', `/etc/pki/tls/certs/sendmail.pem')dnl
+<% end -%>
+<% if scope.lookupvar('sendmail::ssl_client_key') != "" -%>
+define(`confCLIENT_KEY', `<%= scope.lookupvar('sendmail::ssl_client_key') %>')dnl
+<% else -%>
+dnl define(`confCLIENT_KEY', `/etc/pki/tls/certs/sendmail.pem')dnl
+<% end -%>
 dnl #
 dnl # This allows sendmail to use a keyfile that is shared with OpenLDAP's
 dnl # slapd, which requires the file to be readble by group ldap
@@ -141,7 +167,11 @@ dnl # when SSL is enabled-- STARTTLS support is available in version 1.1.1.
 dnl #
 dnl # For this to work your OpenSSL certificates must be configured.
 dnl #
+<% if scope.lookupvar('sendmail::enable_smtps') -%>
+DAEMON_OPTIONS(`Port=smtps, Name=TLSMTA, M=s')dnl
+<% else -%>
 dnl DAEMON_OPTIONS(`Port=smtps, Name=TLSMTA, M=s')dnl
+<% end -%>
 dnl #
 dnl # The following causes sendmail to additionally listen on the IPv6 loopback
 dnl # device. Remove the loopback address restriction listen to the network.
