@@ -52,6 +52,12 @@
 # [*relay_domains*]
 #   List of domains to relay email for. Example: ['example.com','example2.co.uk']
 #
+# [*mailers*]
+#   List of mailers to enable. Default: [ 'smtp', 'procmail' ]
+#
+# [*mailer_definitions*]
+#   Hash of mailer definitions. Example: { 'mailman' => 'P=/etc/mail/mm-handler, F=rDFMhlqSu, U=mailman:mailnull, S=EnvFromL, R=EnvToL/HdrToL, A=mm-handler $h $u' }
+#
 # === Examples
 #
 #  class { sendmail:
@@ -80,7 +86,9 @@ class sendmail (
   $generics_table           = undef,
   $listen_ip                = '127.0.0.1',
   $is_relay                 = undef,
-  $relay_domains            = $sendmail::params::relay_domains
+  $relay_domains            = $sendmail::params::relay_domains,
+  $mailers                  = ['smtp', 'procmail'],
+  $mailer_definitions       = {}
 ) inherits sendmail::params {
     package { $sendmail::params::sendmail_pkgs: ensure => latest }
 
