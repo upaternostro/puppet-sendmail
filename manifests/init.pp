@@ -52,6 +52,12 @@
 # [*relay_domains*]
 #   List of domains to relay email for. Example: ['example.com','example2.co.uk']
 #
+# [*dnsbl*]
+#   Hash of DNS black list. Example: { 'blackholes.mail-abuse.org' => '"550 Mail from " $&{client_addr} " rejected, see http://mail-abuse.org/cgi-bin/lookup?" $&{client_addr}' }
+#
+# [*enhdnsbl*]
+#   Hash of enhanced DNS black list. Example: { 'bl.spamcop.net' => '$&{client_addr} rejected (Relays, Dialups, Spam Sources) - see http://bl.spamcop.net' }
+#
 # === Examples
 #
 #  class { sendmail:
@@ -80,7 +86,9 @@ class sendmail (
   $generics_table           = undef,
   $listen_ip                = '127.0.0.1',
   $is_relay                 = undef,
-  $relay_domains            = $sendmail::params::relay_domains
+  $relay_domains            = $sendmail::params::relay_domains,
+  $dnsbl                    = {},
+  $enhdnsbl                 = {}
 ) inherits sendmail::params {
     package { $sendmail::params::sendmail_pkgs: ensure => latest }
 

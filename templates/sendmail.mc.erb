@@ -159,6 +159,12 @@ dnl #
 FEATURE(`accept_unresolvable_domains')dnl
 dnl #
 dnl FEATURE(`relay_based_on_MX')dnl
+<% scope.lookupvar('sendmail::dnsbl').each do |dnsbl,msg| -%>
+FEATURE(dnsbl, `<%= dnsbl %>', `<%= msg %>')dnl
+<% end -%>
+<% scope.lookupvar('sendmail::enhdnsbl').each do |enhdnsbl,msg| -%>
+FEATURE(enhdnsbl, `<%= enhdnsbl %>', `<%= msg %>', `t')dnl
+<% end -%>
 dnl # 
 dnl # Also accept email sent to "localhost.localdomain" as local email.
 dnl # 
