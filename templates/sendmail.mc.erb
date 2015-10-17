@@ -10,6 +10,11 @@ dnl #
 include(`/usr/share/sendmail-cf/m4/cf.m4')dnl
 VERSIONID(`setup for linux')dnl
 OSTYPE(`linux')dnl
+<% if scope.lookupvar('sendmail::trusted_user') -%>
+define(`confTRUSTED_USER', `<%= scope.lookupvar('sendmail::trusted_user') %>')dnl
+<% else -%>
+dnl define(`confTRUSTED_USER', `root')dnl
+<% end -%>
 dnl #
 dnl # Do not advertize sendmail version.
 dnl #

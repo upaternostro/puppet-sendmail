@@ -14,4 +14,5 @@ class sendmail::params {
   $generics_table_tmpl   = 'sendmail/genericstable.erb'
   $service_name          = 'sendmail'
   $listen_ip              = '127.0.0.1'
+  $trusted_user          = 'smmta'
 }
