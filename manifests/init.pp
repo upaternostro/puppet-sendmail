@@ -34,6 +34,9 @@
 # [*rootmail*]
 #   Mail address for the root user, default is undef
 #
+# [*mailertable*]
+#   Hash of domains and related mailers. Example: { 'uuhost1.my.domain' => 'suucp:uuhost1' }
+#
 # [*aliases*]
 #   Hash of aliases. Example: { 'user' => 'email' }
 #
@@ -75,6 +78,7 @@ class sendmail (
   $masquerade_entire_domain = false,
   $masquerade_domain        = false,
   $rootmail                 = undef,
+  $mailertable              = undef,
   $aliases                  = undef,
   $generics_domains         = undef,
   $generics_table           = undef,
@@ -93,6 +97,19 @@ class sendmail (
         notify  => Exec["make_sendmail_config"],
     }
 
+    if ($mailertable) {
+        file { $sendmail::params::mailertable_path:
+            owner   => 'root',
+            group   => 'root',
+            mode    => '0644',
+            content => template($sendmail::params::mailertable_tmpl),
+            require => Package[$sendmail::params::sendmail_pkgs],
+            notify  => Service[$sendmail::service_name],
+        }
+    } else {
+        file { $sendmail::params::mailertable_path: ensure => absent, notify => Service[$sendmail::service_name] }
+    }
+    
     if ($aliases) {
         file { $sendmail::params::aliases_path:
             owner   => 'root',

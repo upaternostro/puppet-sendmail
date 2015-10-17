@@ -1,0 +1,3 @@
+<% scope.lookupvar('sendmail::mailertable').sort.each do |domain,mailer| -%>
+<%= domain %>	<%= mailer %>
+<% end -%>

@@ -2,6 +2,8 @@ class sendmail::params {
   $sendmail_pkgs         = ['sendmail', 'sendmail-cf']
   $sendmail_mc_path      = '/etc/mail/sendmail.mc'
   $sendmail_mc_tmpl      = 'sendmail/sendmail.mc.erb'
+  $mailertable_path      = '/etc/mail/mailertable'
+  $mailertable_tmpl      = 'sendmail/mailertable.erb'
   $aliases_path          = '/etc/mail/aliases'
   $aliases_tmpl          = 'sendmail/aliases.erb'
   $relay_domains_path    = '/etc/mail/relay-domains'
