@@ -52,6 +52,9 @@
 # [*relay_domains*]
 #   List of domains to relay email for. Example: ['example.com','example2.co.uk']
 #
+# [*input_mail_filters*]
+#   Hash of input mail filters. Example: { 'clmilter' => 'S=local:/var/run/clamav/clmilter.sock, T=S:4m;R:4m' }
+#
 # === Examples
 #
 #  class { sendmail:
@@ -80,7 +83,8 @@ class sendmail (
   $generics_table           = undef,
   $listen_ip                = '127.0.0.1',
   $is_relay                 = undef,
-  $relay_domains            = $sendmail::params::relay_domains
+  $relay_domains            = $sendmail::params::relay_domains,
+  $input_mail_filters       = {}
 ) inherits sendmail::params {
     package { $sendmail::params::sendmail_pkgs: ensure => latest }
 

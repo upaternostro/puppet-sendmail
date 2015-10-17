@@ -40,6 +40,9 @@ define(`STATUS_FILE', `/var/log/mail/statistics')dnl
 define(`UUCP_MAILER_MAX', `2000000')dnl
 define(`confUSERDB_SPEC', `/etc/mail/userdb.db')dnl
 define(`confPRIVACY_FLAGS', `authwarnings,novrfy,noexpn,restrictqrun')dnl
+<% scope.lookupvar('sendmail::input_mail_filters').each do |milter,params| -%>
+INPUT_MAIL_FILTER(`<%= milter %>',`<%= params %>')dnl
+<% end -%>
 define(`confAUTH_OPTIONS', `A')dnl
 dnl #
 dnl # The following allows relaying if the user authenticates, and disallows
