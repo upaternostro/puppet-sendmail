@@ -53,8 +53,13 @@ dnl # use LOGIN. Other mechanisms should be used if the connection is not
 dnl # guaranteed secure.
 dnl # Please remember that saslauthd needs to be running for AUTH. 
 dnl #
+<% if scope.lookupvar('sendmail::auth_mechanisms') -%>
+TRUST_AUTH_MECH(`<%= scope.lookupvar('sendmail::auth_mechanisms') %>')dnl
+define(`confAUTH_MECHANISMS', `<%= scope.lookupvar('sendmail::auth_mechanisms') %>')dnl
+<% else -%>
 dnl TRUST_AUTH_MECH(`EXTERNAL DIGEST-MD5 CRAM-MD5 LOGIN PLAIN')dnl
 dnl define(`confAUTH_MECHANISMS', `EXTERNAL GSSAPI DIGEST-MD5 CRAM-MD5 LOGIN PLAIN')dnl
+<% end -%>
 dnl #
 dnl # Rudimentary information on creating certificates for sendmail TLS:
 dnl #     cd /etc/pki/tls/certs; make sendmail.pem
