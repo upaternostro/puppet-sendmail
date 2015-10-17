@@ -197,6 +197,9 @@ MASQUERADE_DOMAIN(<%= scope.lookupvar('sendmail::masquerade_domain') %>)dnl
 <% else -%>
 dnl MASQUERADE_DOMAIN(mydomain.lan)dnl
 <% end -%>
+<% scope.lookupvar('sendmail::defines').sort.each do |name,value| -%>
+define(`<%= name %>', `<%= value %>')dnl
+<% end -%>
 MAILER(smtp)dnl
 MAILER(procmail)dnl
 dnl MAILER(cyrusv2)dnl
