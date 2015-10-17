@@ -37,6 +37,9 @@
 # [*aliases*]
 #   Hash of aliases. Example: { 'user' => 'email' }
 #
+# [*access*]
+#   Hash of access. Example: { 'Connect:127.0.0.1' => 'RELAY' }
+#
 # [*generics_domains*]
 #   List of domains to serve. Example: [ 'domain1.com', 'domain2.com' }
 #
@@ -76,6 +79,7 @@ class sendmail (
   $masquerade_domain        = false,
   $rootmail                 = undef,
   $aliases                  = undef,
+  $access                   = undef,
   $generics_domains         = undef,
   $generics_table           = undef,
   $listen_ip                = '127.0.0.1',
@@ -104,6 +108,19 @@ class sendmail (
         }
     } else {
         file { $sendmail::params::aliases_path: ensure => absent, notify => Service[$sendmail::service_name] }
+    }
+    
+    if ($access) {
+        file { $sendmail::params::access_path:
+            owner   => 'root',
+            group   => 'root',
+            mode    => '0644',
+            content => template($sendmail::params::access_tmpl),
+            require => Package[$sendmail::params::sendmail_pkgs],
+            notify  => Service[$sendmail::service_name],
+        }
+    } else {
+        file { $sendmail::params::access_path: ensure => absent, notify => Service[$sendmail::service_name] }
     }
     
     if ($is_relay) {

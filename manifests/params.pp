@@ -4,6 +4,8 @@ class sendmail::params {
   $sendmail_mc_tmpl      = 'sendmail/sendmail.mc.erb'
   $aliases_path          = '/etc/mail/aliases'
   $aliases_tmpl          = 'sendmail/aliases.erb'
+  $access_path           = '/etc/mail/access'
+  $access_tmpl           = 'sendmail/access.erb'
   $relay_domains_path    = '/etc/mail/relay-domains'
   $relay_domains_tmpl    = 'sendmail/relay-domains.erb'
   $is_relay              = 'sendmail/relay-domains.erb'
