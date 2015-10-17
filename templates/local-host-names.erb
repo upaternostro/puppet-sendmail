@@ -1,0 +1,5 @@
+localhost
+<%= scope.lookupvar('fqdn') %>
+<% scope.lookupvar('sendmail::local_host_names').each do |name| -%>
+<%= name %>
+<% end -%>
