@@ -76,6 +76,7 @@ class sendmail (
   $masquerade_domain        = false,
   $rootmail                 = undef,
   $aliases                  = undef,
+  $aliases_path             = $sendmail::params::aliases_path,
   $generics_domains         = undef,
   $generics_table           = undef,
   $listen_ip                = '127.0.0.1',
@@ -94,7 +95,7 @@ class sendmail (
     }
 
     if ($aliases) {
-        file { $sendmail::params::aliases_path:
+        file { $aliases_path:
             owner   => 'root',
             group   => 'root',
             mode    => '0644',
@@ -103,7 +104,7 @@ class sendmail (
             notify  => Service[$sendmail::service_name],
         }
     } else {
-        file { $sendmail::params::aliases_path: ensure => absent, notify => Service[$sendmail::service_name] }
+        file { $aliases_path: ensure => absent, notify => Service[$sendmail::service_name] }
     }
     
     if ($is_relay) {
