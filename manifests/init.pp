@@ -52,6 +52,9 @@
 # [*relay_domains*]
 #   List of domains to relay email for. Example: ['example.com','example2.co.uk']
 #
+# [*dont_blame_sendmail*]
+#   Don't blame sendmail options, default is undef
+#
 # === Examples
 #
 #  class { sendmail:
@@ -80,7 +83,8 @@ class sendmail (
   $generics_table           = undef,
   $listen_ip                = '127.0.0.1',
   $is_relay                 = undef,
-  $relay_domains            = $sendmail::params::relay_domains
+  $relay_domains            = $sendmail::params::relay_domains,
+  $dont_blame_sendmail      = undef
 ) inherits sendmail::params {
     package { $sendmail::params::sendmail_pkgs: ensure => latest }
 

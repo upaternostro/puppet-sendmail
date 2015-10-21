@@ -69,7 +69,11 @@ dnl #
 dnl # This allows sendmail to use a keyfile that is shared with OpenLDAP's
 dnl # slapd, which requires the file to be readble by group ldap
 dnl #
+<% if scope.lookupvar('sendmail::dont_blame_sendmail') -%>
+define(`confDONT_BLAME_SENDMAIL', `<%= scope.lookupvar('sendmail::dont_blame_sendmail') %>')dnl
+<% else -%>
 dnl define(`confDONT_BLAME_SENDMAIL', `groupreadablekeyfile')dnl
+<% end -%>
 dnl #
 dnl define(`confTO_QUEUEWARN', `4h')dnl
 dnl define(`confTO_QUEUERETURN', `5d')dnl
