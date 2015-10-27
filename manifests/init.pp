@@ -52,6 +52,12 @@
 # [*relay_domains*]
 #   List of domains to relay email for. Example: ['example.com','example2.co.uk']
 #
+# [*procmail_mailer_path*]
+#   Path for the procmail program, default is /usr/bin/procmail
+#
+# [*local_procmail*]
+#   Command and parameters for the procmail LDA, default is undef
+#
 # === Examples
 #
 #  class { sendmail:
@@ -80,7 +86,9 @@ class sendmail (
   $generics_table           = undef,
   $listen_ip                = '127.0.0.1',
   $is_relay                 = undef,
-  $relay_domains            = $sendmail::params::relay_domains
+  $relay_domains            = $sendmail::params::relay_domains,
+  $procmail_mailer_path     = '/usr/bin/procmail',
+  $local_procmail           = undef
 ) inherits sendmail::params {
     package { $sendmail::params::sendmail_pkgs: ensure => latest }
 

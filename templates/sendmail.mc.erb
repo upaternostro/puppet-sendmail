@@ -34,7 +34,7 @@ dnl define(`confAUTO_REBUILD')dnl
 define(`confTO_CONNECT', `1m')dnl
 define(`confTRY_NULL_MX_LIST', `True')dnl
 define(`confDONT_PROBE_INTERFACES', `True')dnl
-define(`PROCMAIL_MAILER_PATH', `/usr/bin/procmail')dnl
+define(`PROCMAIL_MAILER_PATH', `<%= scope.lookupvar('procmail_mailer_path') %>')dnl
 define(`ALIAS_FILE', `/etc/aliases')dnl
 define(`STATUS_FILE', `/var/log/mail/statistics')dnl
 define(`UUCP_MAILER_MAX', `2000000')dnl
@@ -103,7 +103,11 @@ dnl define(`confCONNECTION_RATE_THROTTLE', `3')dnl
 dnl #
 dnl # The -t option will retry delivery if e.g. the user runs over his quota.
 dnl #
+<% if scope.lookupvar('sendmail::local_procmail') -%>
+FEATURE(local_procmail, `', `<%= scope.lookupvar('sendmail::local_procmail') %>')dnl
+<% else -%>
 FEATURE(local_procmail, `', `procmail -t -Y -a $h -d $u')dnl
+<% end -%>
 FEATURE(`access_db', `hash -T<TMPF> -o /etc/mail/access.db')dnl
 FEATURE(`blacklist_recipients')dnl
 <% if scope.lookupvar('sendmail::exposed_user') -%>
