@@ -23,7 +23,7 @@ dnl #
 dnl # Uncomment and edit the following line if your outgoing mail needs to
 dnl # be sent out through an external mail server:
 dnl #
-<% if scope.lookupvar('sendmail::smart_host') -%>
+<% if @smart_host -%>
 define(`SMART_HOST', `<%= scope.lookupvar('sendmail::smart_host') %>')dnl
 <% else -%>
 dnl define(`SMART_HOST', `smtp.your.provider')dnl
