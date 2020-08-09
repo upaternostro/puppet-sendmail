@@ -87,6 +87,9 @@ FEATURE(redirect)dnl
 FEATURE(always_add_domain)dnl
 FEATURE(use_cw_file)dnl
 FEATURE(use_ct_file)dnl
+<% if @authinfo -%>
+FEATURE(`authinfo')dnl
+<% end -%>
 dnl #
 dnl # The following limits the number of processes sendmail can fork to accept 
 dnl # incoming messages or process its message queues to 20.) sendmail refuses 

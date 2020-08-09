@@ -52,6 +52,11 @@
 # [*relay_domains*]
 #   List of domains to relay email for. Example: ['example.com','example2.co.uk']
 #
+# [*authinfo*]
+#   Authorization array, host based.
+#   Omit host for default authorization.
+#   Example: [ { 'host' => 'smtp.gmail.com', 'userId' => 'root', 'authenticationId' => 'myusername', 'password' => 'mypassword', 'realm' => 'realmifany', 'mechanisms' => 'MECH1 MECH2 ... MECHn' }, { ... }, ... ]
+#
 # === Examples
 #
 #  class { sendmail:
@@ -80,7 +85,8 @@ class sendmail (
   $generics_table           = undef,
   $listen_ip                = '127.0.0.1',
   $is_relay                 = undef,
-  $relay_domains            = $sendmail::params::relay_domains
+  $relay_domains            = $sendmail::params::relay_domains,
+  $authinfo                 = undef
 ) inherits sendmail::params {
     package { $sendmail::params::sendmail_pkgs: ensure => latest }
 
@@ -143,6 +149,26 @@ class sendmail (
         }
     } else {
         file { $sendmail::params::generics_table_path: ensure => absent, notify => Service[$sendmail::service_name] }
+    }
+
+    if ($authinfo) {
+        file { $sendmail::params::authinfo_path:
+            owner   => 'root',
+            group   => 'root',
+            mode    => '0600',
+            content => template($sendmail::params::authinfo_tmpl),
+            require => Package[$sendmail::params::sendmail_pkgs],
+            notify  => Exec['make_authinfo_map'],
+        }
+        exec { 'make_authinfo_map' :
+            command     => "makemap hash $sendmail::params::authinfo_path < $sendmail::params::authinfo_path",
+            path        => [ "/bin", "/usr/sbin" ],
+            cwd         => '/etc/mail',
+            refreshonly => true,
+            notify      => Exec['make_sendmail_config'],
+        }
+    } else {
+        file { $sendmail::params::authinfo_path: ensure => absent, notify => Exec['make_sendmail_config'] }
     }
 
     exec { "make_sendmail_config" :

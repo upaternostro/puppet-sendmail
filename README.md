@@ -28,6 +28,7 @@ Parameters
 * **is_relay**: bool, set to 1 if you want the server to be a relay
 * **relay-domains**: list of domains to relay for. Example: { 'example.com', 'example2.co.uk' }
 * **listen_ip**: Single IP address that the server should listen on. Example: 127.0.0.1
+* **authinfo**: Authorization array, host based. Omit host for default authorization. Example: [ { 'host' => 'smtp.gmail.com', 'userId' => 'root', 'authenticationId' => 'myusername', 'password' => 'mypassword', 'realm' => 'realmifany', 'mechanisms' => 'MECH1 MECH2 ... MECHn' }, { ... }, ... ]
 
 Usage
 -----
