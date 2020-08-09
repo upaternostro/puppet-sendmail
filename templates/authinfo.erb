@@ -1,7 +1,3 @@
-<% scope.lookupvar('sendmail::authinfo').each do |auth| -%>
-AuthInfo:<%= auth.host -%> "U:<%= auth.userId %>" "I:<%= auth.authenticationId %>" "P:<%= auth.password %>"<% if auth.realm -%>
- "R:<%= auth.realm %>"
-<% end -%><% if auth.mechanisms -%>
- "M:<%= auth.mechanisms %>"
-<% end -%>
-<% end -%>
+<% scope.lookupvar('sendmail::authinfo').each do |auth| %>
+AuthInfo:<%= auth['host'] -%> "U:<%= auth['userId'] %>" "I:<%= auth['authenticationId'] %>" "P:<%= auth['password'] %>"<%- if auth['realm'] -%> "R:<%= auth['realm'] -%>"<%- end -%><%- if auth['mechanisms'] -%> "M:<%= auth['mechanisms'] -%>" <%- end -%>
+<% end %>
