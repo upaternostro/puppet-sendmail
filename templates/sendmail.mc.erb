@@ -28,6 +28,10 @@ define(`SMART_HOST', `<%= scope.lookupvar('sendmail::smart_host') %>')dnl
 <% else -%>
 dnl define(`SMART_HOST', `smtp.your.provider')dnl
 <% end -%>
+<% if scope.lookupvar('sendmail::port') -%>
+define(`RELAY_MAILER_ARGS', `TCP $h <%= scope.lookupvar('sendmail::port') %>')dnl
+define(`ESMTP_MAILER_ARGS', `TCP $h <%= scope.lookupvar('sendmail::port') %>')dnl
+<% end -%>
 dnl #
 define(`confDEF_USER_ID', ``8:12'')dnl
 dnl define(`confAUTO_REBUILD')dnl

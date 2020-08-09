@@ -16,6 +16,7 @@ Parameters
 
 * **sendmail_mc_template**: path to the sendmail.mc template
 * **smart_host**: the smtp outgoing server
+* **smtp_port**: the smtp port
 * **exposed_user**: the username to be displayed instead of the masquerade name
 * **masquerade_as**: this causes mail being sent to be labeled as coming from the indicated host.domain
 * **masquerade_envelope**: if masquerading is enabled or the genericstable is in use, set this parameter to true to also masquerade envelopes, normally only the header addresses are masqueraded

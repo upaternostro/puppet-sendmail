@@ -10,6 +10,9 @@
 # [*smart_host*]
 #  The smtp outgoing server
 #
+# [*smtp_port*]
+#  The smtp port
+#
 # [*exposed_user*]
 #  The username to be displayed instead of the masquerade name
 #
@@ -69,6 +72,7 @@
 class sendmail (
   $sendmail_mc_template     = $sendmail::params::sendmail_mc_tmpl,
   $smart_host               = undef,
+  $smtp_port                = undef,
   $exposed_user             = 'root',
   $masquerade_as            = false,
   $masquerade_envelope      = false,
